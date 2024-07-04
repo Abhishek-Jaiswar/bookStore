@@ -1,4 +1,6 @@
-import mongoose, {Schema, models, model, Document} from 'mongoose'
+
+import { ObjectId } from 'mongodb'
+import mongoose, {Schema, models, Document} from 'mongoose'
 
 
 interface Review {
@@ -23,6 +25,7 @@ interface BookTypes extends Document {
     title: string,
     description: string,
     author: string,
+    publications: ObjectId
     price: number,
     publishedDate: Date,
     reviews: Review[],
@@ -56,6 +59,10 @@ const bookSchema = new Schema<BookTypes>({
     author: {
         type: String,
         required: [true, "Author of the book is required!"]
+    },
+    publications: {
+        type: Schema.Types.ObjectId,
+        ref: 'User'
     },
     price: {
         type: Number,

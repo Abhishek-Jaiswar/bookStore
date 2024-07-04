@@ -1,4 +1,4 @@
-import connectToDb from "@/lib/db"
+import connectToDb from "@/lib/config/db"
 import User from "@/lib/models/user"
 import { NextResponse } from "next/server"
 

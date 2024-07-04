@@ -1,6 +1,13 @@
-import { Schema, model, models } from "mongoose";
+import mongoose, { Schema, model, models, Document } from "mongoose";
 
-const userSchema = new Schema(
+
+interface UserTypes extends Document {
+    username: string,
+    email: string,
+    password: string
+}
+
+const userSchema = new Schema<UserTypes>(
     {
         email: {
             type: String,
@@ -22,6 +29,6 @@ const userSchema = new Schema(
     }, { timestamps: true }
 )
 
-const User = models.User || model("User", userSchema)
+const User = models.User as mongoose.Model<UserTypes> || model("User", userSchema)
 
 export default User;
